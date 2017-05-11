@@ -1,5 +1,5 @@
 {
-  "name": "react-countdown",
+  "name": "react-timeframe",
   "version": "0.0.1",
   "description": "Countdown timer for React and React-Native",
   "main": "index.js",
@@ -13,12 +13,11 @@
     "react-native"
   ],
   "author": "Daniel Moore <dan@wildpixeldesign.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "moment": "^2.18.1",
     "react": "^16.0.0-alpha.6",
     "react-mixin": "^3.0.5",
-    "react-native": "^0.44.0",
     "react-timer-mixin": "^0.13.3"
   }
 }
