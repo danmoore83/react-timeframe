@@ -1,6 +1,6 @@
 {
   "name": "react-countdown",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Countdown timer for React and React-Native",
   "main": "index.js",
   "scripts": {
