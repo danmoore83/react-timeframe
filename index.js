@@ -31,7 +31,7 @@ class CountdownTimer extends Component {
 
     tick() {
         const remaining = this.timeRemaining();
-        this.onUpdate(remaining);
+        this.onUpdate(remaining, this);
 
         if (remaining.duration.asSeconds() <= 0) {
             this.setState({ complete: true });
@@ -43,7 +43,7 @@ class CountdownTimer extends Component {
         this.timer = this.setInterval(this.tick, 1000);
     }
 
-    render() { return this.onRender(this.state); }
+    render() { return this.onRender(this.state, this); }
 }
 
 reactMixin(CountdownTimer.prototype, TimerMixin);
