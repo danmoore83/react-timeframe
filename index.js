@@ -10,7 +10,7 @@ class CountdownTimer extends Component {
 
         const {
             onRender = () => {},
-            onUpdate = () => {}
+            onUpdate = (time) => { this.setState({ time }); }
         } = props || {};
 
         this.onRender = onRender;
