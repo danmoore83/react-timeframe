@@ -10,9 +10,11 @@ class CountdownTimer extends Component {
 
         const {
             onRender = () => {},
-            onUpdate = (time) => { this.setState({ time }); }
+            onUpdate = (time) => { this.setState({ time }); },
+            urgency = 60000
         } = props || {};
 
+        this.urgency = parseInt(urgency, 10);
         this.onRender = onRender;
         this.onUpdate = onUpdate;
     }
@@ -32,6 +34,10 @@ class CountdownTimer extends Component {
     tick() {
         const remaining = this.timeRemaining();
         this.onUpdate(remaining, this);
+
+        if (remaining.duration.asMilliseconds() <= this.urgency) {
+            this.setState({ urgent: true });
+        }
 
         if (remaining.duration.asSeconds() <= 0) {
             this.setState({ complete: true });
