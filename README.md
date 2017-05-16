@@ -34,13 +34,13 @@ Note: Ensure a standard function is used for onRender. ES6 arrow functions will 
 <Timeframe
   onRender={function() {
     let val;
-    
+
     if (this.state.complete) {
       val = 'Completed';
     } else {
       val = `${this.state.time.hours}:${this.state.time.minutes}:${this.state.time.seconds};
     }
-  
+
     return val;
   }}
   />
@@ -52,7 +52,7 @@ The onUpdate prop can be used to override the default function for handling a ti
 
 default: https://github.com/wildpixeldesign/react-timeframe/blob/master/index.js#L13
 
-custom: 
+custom:
 ```
 <Timeframe
   onUpdate={function(time) {
@@ -75,10 +75,55 @@ If you would like to access the parent Component's context, or if u just want to
     this.foo = 'bar'; // this is current instance of whereever this Component is called from.
     self.setState({ time }); // self is current instance of Timeframe
   }}
-  onRender={ (self) => {
+  onRender={ (state, self) => {
     return `${self.state.time.hours}:${self.state.time.minutes}:${self.state.time.seconds};
   }}
   />
+```
+
+### Urgency state property
+A threshold prop (in milliseconds) can be used that when crossed will set a state of urgent: true
+This can be used to add a different classname, or ReactNative styles, or whatever else you feel like.
+Default: 60000
+
+```
+<Timeframe
+    urgency={30000}
+
+    onRender={function() {
+        if (this.state.urgent) { console.log('urgent') }
+    }}
+ />
+
+```
+
+
+### Human readable countdown
+Example implementation for a human-readable countdown. e.g. 2 days, 1 hour, 42 mins
+
+```
+onRender={function() {
+    const
+        state = (this.state || {}),
+        time = state.time,
+        values = [];
+
+    if (state.complete) {
+        values.push('Game started');
+    } else if (time) {
+        if (time.days) values.push(`${time.days} ${time.days === 1 ? 'day' : 'days'}`);
+        if (time.hours) values.push(`${time.hours} ${time.hours === 1 ? 'hour' : 'hours'}`);
+
+        values.push(`${time.minutes} ${time.minutes === 1 ? 'minute' : 'minutes'}`);
+        values.push(`${time.seconds} ${time.seconds === 1 ? 'second' : 'seconds'}`);
+    }
+
+    return (
+        <Text>
+            {values.join(', ')}
+        </Text>
+    );
+}}
 ```
 
 ## Dependencies
