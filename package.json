@@ -1,6 +1,6 @@
 {
   "name": "react-timeframe",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Countdown timer for React and React-Native",
   "main": "index.js",
   "scripts": {
