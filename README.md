@@ -18,7 +18,7 @@ import Timeframe from 'react-timeframe';
 
 ```
 <Timeframe
-  endTime={"2017-05-12T08:00:00Z"}
+  endsAt={"2017-05-12T08:00:00Z"}
   onRender={function() {
     return `${this.state.time.hours}:${this.state.time.minutes}:${this.state.time.seconds};
   }}
