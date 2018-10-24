@@ -8,24 +8,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wildpixeldesign/react-timeframe.git"
+    "url": "https://github.com/danmoore83/react-timeframe.git"
   },
   "keywords": [
     "timer",
     "countdown",
+    "date time",
+    "time",
+    "ago",
+    "relative",
     "react",
     "react-native"
   ],
   "author": "Daniel Moore <dan@wildpixeldesign.com>",
   "bugs": {
-    "url": "https://github.com/wildpixeldesign/react-timeframe/issues"
+    "url": "https://github.com/danmoore83/react-timeframe/issues"
   },
-  "homepage": "https://github.com/wildpixeldesign/react-timeframe",
+  "homepage": "https://github.com/danmoore83/react-timeframe",
   "license": "MIT",
   "dependencies": {
+    "date-fns": "^1.29.0",
     "moment": "^2.18.1",
-    "react": "^16.0.0-alpha.6",
-    "react-mixin": "^3.0.5",
-    "react-timer-mixin": "^0.13.3"
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-mixin": "^5.0.0",
+    "react-timer-mixin": "^0.13.4"
   }
 }

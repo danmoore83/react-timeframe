@@ -18,13 +18,27 @@ import Timeframe from 'react-timeframe';
 
 ```
 <Timeframe
-  endsAt={"2017-05-12T08:00:00Z"}
-  onRender={function() {
-    return `${this.state.time.hours}:${this.state.time.minutes}:${this.state.time.seconds};
-  }}
+  targetDate={1540349389582}
   />
 ```
-Note: Ensure a standard function is used for onRender. ES6 arrow functions will bind the 'this' context to whereever it is used. More below on arrow functions...
+
+```
+<Timeframe
+  targetDate={"2017-05-12T08:00:00Z"}
+  />
+```
+
+## Props
+
+| Prop               | Type          | Default | Required | Description  |
+| ------------------ | ------------- | ------- | -------- | ------------ |
+| targetDate         | String/Number | n/a     | True     | A date string ("2017-05-12T08:00:00Z") or timestamp (1540349389582) |
+| stopAfterCountdown | Boolean       | false   | False    | Whether the timer will stop once the target date is reached
+| urgency            | Number        | 60000   | False    | Number of seconds before target reached that the state is set to urgent |
+| dateFormat         | String        | 'MMMM Do YYYY' | False | What format to display date in. from date-fns/format [Link](https://date-fns.org/v1.29.0/docs/format)
+| distanceOptions    | Object        | { includeSeconds: true, addSuffix: true } | False |  Display options for distanceInWordsToNow function from date-fns [Link](https://date-fns.org/v1.29.0/docs/distanceInWordsToNow)
+| onRender           | Function      | [onRender](https://github.com/danmoore83/react-timeframe/blob/master/index.js#L69)      | False    | If < 2 days ago : Returns string with distance between the given date and now in words. If > 2 days ago returns string formatted to the dateFormat prop.
+| onUpdate           | Function      | [onRender](https://github.com/danmoore83/react-timeframe/blob/master/index.js#L70)      | False    |
 
 ## Advanced Usage
 
@@ -32,51 +46,16 @@ Note: Ensure a standard function is used for onRender. ES6 arrow functions will 
 
 ```
 <Timeframe
-  onRender={function() {
+  onRender={function(state, props, self) {
     let val;
 
-    if (this.state.complete) {
+    if (state.complete) {
       val = 'Completed';
     } else {
-      val = `${this.state.time.hours}:${this.state.time.minutes}:${this.state.time.seconds};
+      val = yourOwnCustomFunctionToHandleDisplayOfRemainingTime(state.timeRemaining)
     }
 
     return val;
-  }}
-  />
-```
-
-
-### onUpdate
-The onUpdate prop can be used to override the default function for handling a time update.
-
-default: https://github.com/wildpixeldesign/react-timeframe/blob/master/index.js#L13
-
-custom:
-```
-<Timeframe
-  onUpdate={function(time) {
-    time.foo = 'bar';
-    this.setState({ time })
-  }}
-  />
-```
-
-### Parent context / ES6 arrow functions.
-A standard function used in the onUpdate and onComplete props, will have the 'this' context set to the instance of react-timeframe.
-
-However...
-
-If you would like to access the parent Component's context, or if u just want to use an arrow function for consistency, then the react-timeframe instance can be access via the 'self' argument.
-
-```
-<Timeframe
-  onUpdate={ (time, self) => {
-    this.foo = 'bar'; // this is current instance of whereever this Component is called from.
-    self.setState({ time }); // self is current instance of Timeframe
-  }}
-  onRender={ (state, self) => {
-    return `${self.state.time.hours}:${self.state.time.minutes}:${self.state.time.seconds};
   }}
   />
 ```
@@ -98,37 +77,11 @@ Default: 60000
 ```
 
 
-### Human readable countdown
-Example implementation for a human-readable countdown. e.g. 2 days, 1 hour, 42 mins
-
-```
-onRender={function() {
-    const
-        state = (this.state || {}),
-        time = state.time,
-        values = [];
-
-    if (state.complete) {
-        values.push('Game started');
-    } else if (time) {
-        if (time.days) values.push(`${time.days} ${time.days === 1 ? 'day' : 'days'}`);
-        if (time.hours) values.push(`${time.hours} ${time.hours === 1 ? 'hour' : 'hours'}`);
-
-        values.push(`${time.minutes} ${time.minutes === 1 ? 'minute' : 'minutes'}`);
-        values.push(`${time.seconds} ${time.seconds === 1 ? 'second' : 'seconds'}`);
-    }
-
-    return (
-        <Text>
-            {values.join(', ')}
-        </Text>
-    );
-}}
-```
 
 ## Dependencies
 - React
-- moment
+- prop-types
+- date-fns
 - react-mixin
 - react-timer-mixin
 
