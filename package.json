@@ -2,9 +2,14 @@
   "name": "react-timeframe",
   "version": "2.0.0",
   "description": "Countdown timer for React and React-Native",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/index.js -d lib",
+    "prepublish": "npm run test && npm run build",
+    "lint": "eslint ./src",
+    "test:unit": "jest",
+    "test": "npm run lint && npm run test:unit"
   },
   "repository": {
     "type": "git",
@@ -26,12 +31,46 @@
   },
   "homepage": "https://github.com/danmoore83/react-timeframe",
   "license": "MIT",
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "./setupTests.js"
+    ],
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "moment": "^2.18.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
+    "react-dom": "^16.8.1",
     "react-mixin": "^5.0.0",
     "react-timer-mixin": "^0.13.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-jest-enzyme": "^7.0.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0"
   }
 }

@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 
-import getMilliseconds from 'date-fns/get_milliseconds'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import format from 'date-fns/format'
+import getMilliseconds from 'date-fns/get_milliseconds';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import format from 'date-fns/format';
 
 function readableDate(time, options = {}, dateFormat) {
 
   const
-    date = new Date((time || "")),
+    date = new Date((time || '')),
     diff = (((new Date()).getTime() - date.getTime()) / 1000),
     day_diff = Math.floor(diff / 86400);
 
@@ -55,7 +55,7 @@ class Timeframe extends Component {
   }
 
   render() { return this.props.onRender(this.state, this.props, this); }
-};
+}
 
 Timeframe.defaultProps = {
   interval: 1000,
@@ -66,11 +66,12 @@ Timeframe.defaultProps = {
     includeSeconds: true,
     addSuffix: true
   },
-  onRender: (state, props, self) => readableDate(props.targetDate, props.distanceOptions, props.dateFormat),
+  onRender: (state, props /*, self*/) => readableDate(props.targetDate, props.distanceOptions, props.dateFormat),
   onUpdate: (timeRemaining, self) => self.setState({ timeRemaining })
 };
 
 Timeframe.propTypes = {
+  interval: PropTypes.number.isRequired,
   targetDate: PropTypes.oneOfType([
     PropTypes.string.isRequired,
     PropTypes.number.isRequired,
