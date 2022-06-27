@@ -14,7 +14,7 @@ package-lock.json
 yarn.lock
 
 # project files
-src
+src/__tests__
 test
 examples
 CHANGELOG.md
